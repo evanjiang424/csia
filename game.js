@@ -18,16 +18,13 @@ function shuffleGrid(){
 function startGame() {
     console.log("Start Game");
 
-    
     const answerBoxes = document.querySelectorAll('.answer_box');
     answers = Array.from(answerBoxes).map(box => box.textContent.trim());
     // Iterate and remove each one
     answerBoxes.forEach((box) => {
         box.remove();
     });
-
-
-    answers = []; // Clear previous answers
+    
     selectedItems = []; // Clear selected items
 
 
@@ -162,6 +159,18 @@ function checkGame(){
     if(selectedText.every(text => yellow.includes(text))){
         correct++;
         checkGameOutput("yellow");
+        const answerBox = document.createElement("div");
+        answerBox.classList.add("answer_box");
+        answerBox.style.backgroundColor = "yellow";
+        answerBox.style.backgroundColor = "yellow";
+        answerBox.textContent = answers[0];
+        const bottomContainer = document.querySelector("#bottom-container");
+        if (bottomContainer) {
+            bottomContainer.appendChild(answerBox);
+            answers.shift();
+        } else {
+            console.error("Bottom container not found!");
+        }
         return "yellow";
     }
 
