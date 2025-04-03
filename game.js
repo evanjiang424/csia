@@ -177,18 +177,51 @@ function checkGame(){
     if(selectedText.every(text => blue.includes(text))){
         correct++;
         checkGameOutput("blue");
+        const answerBox = document.createElement("div");
+        answerBox.classList.add("answer_box");
+        answerBox.style.backgroundColor = "blue";
+        answerBox.textContent = answers[0];
+        const bottomContainer = document.querySelector("#bottom-container");
+        if (bottomContainer) {
+            bottomContainer.appendChild(answerBox);
+            answers.shift();
+        } else {
+            console.error("Bottom container not found!");
+        }
         return "blue";
     }
 
     if(selectedText.every(text => green.includes(text))){
         correct++;
         checkGameOutput("green");
+        const answerBox = document.createElement("div");
+        answerBox.classList.add("answer_box");
+        answerBox.style.backgroundColor = "green";
+        answerBox.textContent = answers[0];
+        const bottomContainer = document.querySelector("#bottom-container");
+        if (bottomContainer) {
+            bottomContainer.appendChild(answerBox);
+            answers.shift();
+        } else {
+            console.error("Bottom container not found!");
+        }
         return "green";
     }
 
     if(selectedText.every(text => purple.includes(text))){
         correct++;
         checkGameOutput("purple");
+        const answerBox = document.createElement("div");
+        answerBox.classList.add("answer_box");
+        answerBox.style.backgroundColor = "purple";
+        answerBox.textContent = answers[0];
+        const bottomContainer = document.querySelector("#bottom-container");
+        if (bottomContainer) {
+            bottomContainer.appendChild(answerBox);
+            answers.shift();
+        } else {
+            console.error("Bottom container not found!");
+        }
         return "purple";
     }
 
