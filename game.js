@@ -134,6 +134,34 @@ function deselectAll() {
     selectedItems = [];
 }
 
+function revealRemainingAnswers() {
+    console.log("Revealing remaining answers...");
+    const bottomContainer = document.querySelector("#bottom-container");
+
+    if (!bottomContainer) {
+        console.error("Bottom container not found!");
+        return;
+    }
+
+    // Define the colors corresponding to the answers
+    const colors = ["yellow", "blue", "green", "purple"];
+
+    // Iterate through the answers array
+    answers.forEach((answer, index) => {
+        // Check if an answer box for this color already exists
+        const existingBox = bottomContainer.querySelector(`.answer_box[style*="background-color: ${colors[index]}"]`);
+        if (!existingBox) {
+            // Create a new answer box if it doesn't exist
+            const answerBox = document.createElement("div");
+            answerBox.classList.add("answer_box");
+            answerBox.style.backgroundColor = colors[index];
+            answerBox.textContent = answer;
+
+            bottomContainer.appendChild(answerBox);
+        }
+    });
+}
+
 function checkGameOutput(color){
     
     for(let i = 0; i < selectedItems.length; i++){
@@ -156,6 +184,12 @@ function checkGame(){
         return;
     }
 
+    if(guesses == 0){
+        alert("No guesses left!");
+        revealRemainingAnswers();
+        return;
+    }
+
     if(selectedText.every(text => yellow.includes(text))){
         correct++;
         checkGameOutput("yellow");
@@ -167,7 +201,7 @@ function checkGame(){
         const bottomContainer = document.querySelector("#bottom-container");
         if (bottomContainer) {
             bottomContainer.appendChild(answerBox);
-            answers.shift();
+            
         } else {
             console.error("Bottom container not found!");
         }
@@ -180,11 +214,11 @@ function checkGame(){
         const answerBox = document.createElement("div");
         answerBox.classList.add("answer_box");
         answerBox.style.backgroundColor = "blue";
-        answerBox.textContent = answers[0];
+        answerBox.textContent = answers[1];
         const bottomContainer = document.querySelector("#bottom-container");
         if (bottomContainer) {
             bottomContainer.appendChild(answerBox);
-            answers.shift();
+            
         } else {
             console.error("Bottom container not found!");
         }
@@ -197,11 +231,11 @@ function checkGame(){
         const answerBox = document.createElement("div");
         answerBox.classList.add("answer_box");
         answerBox.style.backgroundColor = "green";
-        answerBox.textContent = answers[0];
+        answerBox.textContent = answers[2];
         const bottomContainer = document.querySelector("#bottom-container");
         if (bottomContainer) {
             bottomContainer.appendChild(answerBox);
-            answers.shift();
+            
         } else {
             console.error("Bottom container not found!");
         }
@@ -214,11 +248,11 @@ function checkGame(){
         const answerBox = document.createElement("div");
         answerBox.classList.add("answer_box");
         answerBox.style.backgroundColor = "purple";
-        answerBox.textContent = answers[0];
+        answerBox.textContent = answers[3];
         const bottomContainer = document.querySelector("#bottom-container");
         if (bottomContainer) {
             bottomContainer.appendChild(answerBox);
-            answers.shift();
+            
         } else {
             console.error("Bottom container not found!");
         }
