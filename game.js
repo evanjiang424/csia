@@ -5,6 +5,7 @@ var purple = new Array();
 var answers = []; // Array to store answers
 let selectedItems = []; // Array to track selected items
 let correct = 0;
+let guesses = 4;
 
 function shuffleGrid(){
     const board = document.querySelector('.board');
@@ -111,6 +112,7 @@ function startGame() {
 
 
 function decrementGuesses() {
+    guesses = guesses - 1;
     const circles = document.querySelectorAll("#guessTracker .circle");
     for (let i = circles.length - 1; i >= 0; i--) {
         if (!circles[i].classList.contains("hidden")) {
@@ -158,6 +160,28 @@ function revealRemainingAnswers() {
             answerBox.textContent = answer;
 
             bottomContainer.appendChild(answerBox);
+        }
+    });
+
+    // Reveal all tiles' colors
+    const gamePieces = document.querySelectorAll(".game_piece");
+    gamePieces.forEach((piece) => {
+        const textElement = piece.querySelector("p");
+        const textContent = textElement.textContent;
+
+        // Check which color the text belongs to and set the background color
+        if (yellow.includes(textContent)) {
+            piece.style.backgroundColor = "yellow";
+            textElement.style.backgroundColor = "yellow";
+        } else if (blue.includes(textContent)) {
+            piece.style.backgroundColor = "blue";
+            textElement.style.backgroundColor = "blue";
+        } else if (green.includes(textContent)) {
+            piece.style.backgroundColor = "green";
+            textElement.style.backgroundColor = "green";
+        } else if (purple.includes(textContent)) {
+            piece.style.backgroundColor = "purple";
+            textElement.style.backgroundColor = "purple";
         }
     });
 }
